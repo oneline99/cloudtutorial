@@ -1,0 +1,245 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "cloudcoding.ipynb",
+      "provenance": [],
+      "toc_visible": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "MzH2xw4YHYV1"
+      },
+      "source": [
+        "# **Introduction to F5 Python SDK**\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "y5e94irDHXnR"
+      },
+      "source": [
+        "## **What is Python?**\n",
+        "Python is a popular programming language created since 1991, widely used for:\n",
+        "\n",
+        "* web development (server-side) and software development,\n",
+        "* mathematics, analytics and machine learning\n",
+        "* system scripting\n",
+        "\n",
+        "### **What can Python do?**\n",
+        "* Python can be used on a server to create web applications.\n",
+        "* Python can be used alongside software to create workflows.\n",
+        "* Python can connect to database systems. It can also read and modify files.\n",
+        "* Python can be used to handle big data and perform complex mathematics.\n",
+        "* Python can be used for rapid prototyping, or for production-ready software development.\n",
+        "\n",
+        "### **Why Python?**\n",
+        "* Python works on different platforms (Windows, Mac, Linux, Raspberry Pi, etc).\n",
+        "* Python has a simple syntax similar to the English language.\n",
+        "* Python has syntax that allows developers to write programs with fewer lines comapared to other programming languages.\n",
+        "* Python code can be executed as soon as it is written, meaning that prototyping can be very quick.\n",
+        "\n",
+        "### **Fun Facts**\n",
+        "* Cloud Coding is the brainchild of Charles Chong, and the initiative is supported by JC Kwon.\n",
+        "* The intention is to enable non-developers to experience fun with coding, and allow students to continue to code on their own after the lessons via an online coding platform.\n",
+        "* Google Colab enables interactive coding using Jupyter Notebook, which allows coding to be performed on both online and offline platforms. \n",
+        "\n",
+        "### **Python Syntax compared to other programming languages**\n",
+        "* Python uses new lines to complete a command, as opposed to other programming languages which often use semicolons or parentheses.\n",
+        "* Python relies on indentation, using whitespace, to define scope; such as the scope of loops, functions and classes. Other programming languages often use curly-brackets for this purpose.\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "AedIlms4HgsG"
+      },
+      "source": [
+        "## **Let's Start! What to expect?** \n",
+        "In this short lesson, you will learn to install F5 SDK Python Module. F5 SDk Module allows specific actions or functions to be called by Python. The module witll interact with F5 through API calls and coders need not make API calls in their codes. This allows developers to quickly compile info or make changes to F5 services.\n",
+        "\n",
+        "Python modules are installed using PIP, which is a package/module manager for Python. Modules/packages are normally installed for specific environment and not global environment, which helps to reduce unneccesary coding footprint."
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "DGdT08QeHso0"
+      },
+      "source": [
+        "## **Step 1. Run PIP to install F5 SDK**\n",
+        "Click on the run button to execute the command. You can also try to re-type the command and execute it."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "xW27gkBYHun8"
+      },
+      "source": [
+        "# install F5-SDK Packages\n",
+        "!pip install f5-sdk-python"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "Zhv66zuyH2ff"
+      },
+      "source": [
+        "## **Step 2. Get ready to Code. Import F5 SDK functions**\n",
+        "This single line of code imports ManagementClient function, which is a Python script to connect to F5 devices."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "hPY8TMuZHzPM"
+      },
+      "source": [
+        "#import ManagementClient\n",
+        "from f5sdk.bigip import ManagementClient"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "ilspv4FzIAGu"
+      },
+      "source": [
+        "device = ManagementClient('54.151.170.57', user='admin', password='PythoN@3')\n",
+        "device.get_info()"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "vaS8qhO2ISON"
+      },
+      "source": [
+        "Install IPStack package to gather GeoIP Information. You can use the provided token or sign up for a token from ipstack.com"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "LE-qc04FIRZk"
+      },
+      "source": [
+        "!pip install ipstack"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "U8KuZlM7IDId"
+      },
+      "source": [
+        "import pandas as pd  # Import the panda package\n",
+        "import numpy as np # Import the numpy package\n",
+        "\n",
+        "from ipstack import GeoLookup\n",
+        "\n",
+        "geo_lookup = GeoLookup(\"0cbeddca8c7f050ead7d6eff52a73bb4\")\n",
+        "\n",
+        "ip = [\"110.159.38.126\", \"54.151.170.57\", \"110.159.38.180\"]\n",
+        "for x in ip:\n",
+        "  location = geo_lookup.get_location(x)\n",
+        "  address = location['city']\n",
+        "# print(ipadd, address)\n",
+        "\n",
+        "  datastr = str(ip.index(x))+\",\"+address+\",\"+x+\";\"\n",
+        "  print(datastr)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "bJr8HT-fItO1"
+      },
+      "source": [
+        "Import GoogleAuth and GoogleDrive functions for authentication."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "cqTSgCosIsNv"
+      },
+      "source": [
+        "from pydrive.auth import GoogleAuth\n",
+        "from pydrive.drive import GoogleDrive\n",
+        "from google.colab import auth\n",
+        "from oauth2client.client import GoogleCredentials"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "C-QQqHUtJQg3"
+      },
+      "source": [
+        "Authenticate and create the PyDrive client."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "JP8eMNe_JgZO"
+      },
+      "source": [
+        "auth.authenticate_user()\n",
+        "gauth = GoogleAuth()\n",
+        "gauth.credentials = GoogleCredentials.get_application_default()\n",
+        "drive = GoogleDrive(gauth)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "u9fZ8UPzJjya"
+      },
+      "source": [
+        "Create and upload a CSV file."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "iYQitA9TJhgK"
+      },
+      "source": [
+        "uploaded = drive.CreateFile({'title': 'bigipdata.csv'})\n",
+        "uploaded.SetContentString(datastr)\n",
+        "uploaded.Upload()\n",
+        "print('Uploaded file with ID {}'.format(uploaded.get('id')))"
+      ],
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
